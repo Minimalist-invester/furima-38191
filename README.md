@@ -2,6 +2,7 @@
 
 ## users table
 
+
 | Column             | Type                | Options                   |
 |--------------------|---------------------|---------------------------|
 | nickname           | string              | null: false               |
@@ -15,10 +16,12 @@
 | first_name_kana    | string              | null: false               |
 | birth_day          | date                | null: false               |
 
+
 Association
 has_many :products dependent: :destroy
 belongs_to :destination dependent: :destroy
 belongs_to :card dependent: :destroy
+
 
 ## destination table
 | Column	           | Type	               | Options                   |
@@ -35,8 +38,10 @@ belongs_to :card dependent: :destroy
 | building_name	     | string	
 | phone_number	     | string	
 
+
 Association
 belongs_to :user
+
 
 ## card table
 | Column	           | Type	               | Options                   |
@@ -44,6 +49,7 @@ belongs_to :user
 | user_id	           | integer	           | null: false, foreign_key: true
 | customer_id	       | string	             | null: false
 | card_id	           | string	             | null: false
+
 
 Association
 belongs_to :user
@@ -53,6 +59,7 @@ belongs_to :user
 |--------------------|---------------------|---------------------------|
 | name	             | string              | null: false
 | ancestry	         | string	
+
 
 Association
 has_many :products
@@ -74,6 +81,7 @@ has_many :products
 | shipping_id	       | integer	           | null: false, foreign_key: true
 | user_id	           | integer	           | null: false, foreign_key: true
 
+
 Association
 belongs_to :user dependent: :destroy
 belongs_to :category dependent: :destroy
@@ -81,6 +89,7 @@ belongs_to :brand dependent: :destroy
 has_many :images dependent: :destroy
 
 belongs_to_active_hash :prefecture
+
 
 ## image table
 | Column	           | Type	               | Options
@@ -96,6 +105,8 @@ belongs_to :product
 |--------------------|---------------------|---------------------------|
 | name	             | string	             | index: true
 
+
 Association
 has_many :products
+
 
