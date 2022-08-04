@@ -1,9 +1,9 @@
 ## users テーブル
 | Column            | Type    |	Options  |
 |--------------------------------------------------------|
-|nickname	          | string	| null: false, unique: true
+|nickname	          | string	| null: false
 |email	            | string	| null: false, unique: true
-|encrypted_password	| string	| null: false, unique: true
+|encrypted_password	| string	| null: false
 |last_name	        | string	| null: false
 |first_name	        | string	| null: false
 |last_name_kana	    | string	| null: false
@@ -47,7 +47,7 @@ has_one :payment
 ## payments テーブル
 | Column	          | Type	      | Options
 |--------------------------------------------------------|
-| orders	          | references	| null: false, foreign_key: true
+| order 	          | references	| null: false, foreign_key: true
 | postcode	        | string	    | null: false
 | prefecture_id	    | integer    	| null: false
 | city	            | string	    | null: false
