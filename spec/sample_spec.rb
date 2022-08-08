@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
         binding.pry
         expect(@user.errors.full_messages).to include("Nickname can't be brank")
       end
+      
 # 省略
   end
 end
