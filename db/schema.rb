@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_021358) do
+ActiveRecord::Schema.define(version: 2022_08_12_105620) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -46,11 +46,6 @@ ActiveRecord::Schema.define(version: 2022_08_11_021358) do
     t.index ["order_id"], name: "index_addresses_on_order_id"
   end
 
-  create_table "item_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "text", null: false
@@ -69,19 +64,10 @@ ActiveRecord::Schema.define(version: 2022_08_11_021358) do
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.string "postcode", null: false
-    t.integer "prefecture_id", null: false
-    t.string "city", null: false
-    t.string "block", null: false
-    t.string "building"
-    t.string "phone_number", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_payments_on_order_id"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -105,5 +91,6 @@ ActiveRecord::Schema.define(version: 2022_08_11_021358) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "orders"
   add_foreign_key "items", "users"
-  add_foreign_key "payments", "orders"
+  add_foreign_key "orders", "items"
+  add_foreign_key "orders", "users"
 end
