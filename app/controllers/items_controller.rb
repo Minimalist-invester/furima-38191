@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  #before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_login, only: [:edit,:update,:destroy]
   def index
     @items = Item.all.order(created_at: "DESC")
   end
@@ -18,6 +19,28 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def edit
+    if @item.order != nil
+      return redirect_to root_path
+    end
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to action: :show
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to action: :index
+  end
+
   private
 
   def set_item
@@ -29,6 +52,10 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
     
   end
+
+  def set_login
+    redirect_to action: :index unless current_user.id == @item.user_id
+  end 
 end
 
 
