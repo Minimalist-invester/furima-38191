@@ -1,23 +1,24 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+
   belongs_to :user
   has_one :order
+
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :bearer
+  belongs_to :prefecure
+  belongs_to :ship_date
   has_one_attached :image
-  belongs_to_active_hash :category
-  belongs_to_active_hash :sales_status
-  belongs_to_active_hash :shipping_fee_status
-  belongs_to_active_hash :prefecture
-  belongs_to_active_hash :scheduled_delivery
 
-  with_options presence: true do
-    validates :title, :text, :image
-    
-    with_options numericality: { other_than: 1 } do
-      validates :category_id, :sales_status_id, :shipping_fee_status_id, :prefecture_id, :scheduled_delivery_id
-    end
-
-    with_options format: { with: /\A[0-9]+\z/ } do
-      validates :price, numericality: { greater_than: 300, less_than: 9999999 } 
-    end
-  end
+  validates :product, presence: true, length: { maximum: 40 }
+  validates :product_description, presence: true, length: { maximum: 1000 }
+  validates :price, presence: true,
+                    numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: ' must be within 300~9999999' }
+  validates :category_id, presence: true, numericality: { other_than: 1 }
+  validates :condition_id, presence: true, numericality: { other_than: 1 }
+  validates :bearer_id, presence: true, numericality: { other_than: 1 }
+  validates :prefecure_id, presence: true, numericality: { other_than: 1 }
+  validates :ship_date_id, presence: true, numericality: { other_than: 1 }
+  validates :image, presence: true
 end
