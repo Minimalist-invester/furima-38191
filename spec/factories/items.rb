@@ -9,6 +9,7 @@ FactoryBot.define do
     prefecure_id        { 2 }
     ship_date_id        { 2 }
 
+    
     association :user
 
     after(:build) do |message|
