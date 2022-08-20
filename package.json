@@ -1,5 +1,5 @@
 {
-  "name": "furima_38191",
+  "name": "furima-38191",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0-alpha",
@@ -14,7 +14,7 @@
   },  
  "engines" : {
 
-   "node": "14.19.3" 
+   "node": "14.8.0" 
 
  }
 }
